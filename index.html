@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>On the Move Pet Rehab - Mobile Pet Physical Therapy</title>
+    
+    <!-- Google Analytics -->
+    <!-- REPLACE G-XXXXXXXXXX WITH YOUR MEASUREMENT ID FROM GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -1590,6 +1601,14 @@
                 data: data
             });
             localStorage.setItem('onthemoveAnalytics', JSON.stringify(events));
+            
+            // Send to Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventType, {
+                    'event_category': 'engagement',
+                    'event_label': JSON.stringify(data)
+                });
+            }
         }
 
         // Start quiz on page load
